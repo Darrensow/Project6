@@ -1,0 +1,7 @@
+name,age,height,weight,gender
+pua zhi xian,19,166,56,Female
+pua zhi xian, ,393,32, 
+za,19,155,40, Male
+wd,12, ,40,Female
+lee,12,190,70,Male
+lee,25,283,92,Female
