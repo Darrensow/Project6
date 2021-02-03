@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mainq6;
+package Main;
 
-/**
- *
- * @author xianp
- */
 public class calculate extends remove{
     public void find(){
         boolean[] is_digit=new boolean[data[0].length];

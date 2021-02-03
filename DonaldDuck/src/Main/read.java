@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mainq6;
+package Main;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author xianp
- */
 public class read {
 
     protected String[][] data;
@@ -25,8 +16,7 @@ public class read {
     public void readdata() {
         int counter = 0;
         try {
-            Scanner in = new Scanner(new FileInputStream("data.txt"));
-
+            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));
             while (in.hasNextLine()) {
                 String a = in.nextLine();
                 String[] ar = a.split(",");
@@ -41,7 +31,7 @@ public class read {
         }
         data = new String[counter][size];
         try {
-            Scanner in = new Scanner(new FileInputStream("data.txt"));
+            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));
 
             while (in.hasNextLine()) {
 

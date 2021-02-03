@@ -1,4 +1,4 @@
-package mainq6;
+package Main;
 
 public class subset extends write {
 
