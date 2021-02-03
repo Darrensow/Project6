@@ -8,7 +8,7 @@ public class write extends read {
 
     public void writefile() {
         try {
-            PrintWriter out = new PrintWriter(new FileOutputStream("create.txt"));
+            PrintWriter out = new PrintWriter(new FileOutputStream("create.txt"));           // write data to file
             for (int i = 0; i < data.length; i++) {
                 String a="";
                 for (int j = 0; j < data[i].length; j++) {
