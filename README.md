@@ -1,5 +1,9 @@
 # Project6
-# Donald Duck's Digital Data Ducts 
+# Donald Duck's Digital Data Ducts
+
+# Project Timeline 
+- 4-7/2021 Finish Part 1 - 4
+- 8-11/2/2021 Finish Knn Algorithm part 
 
 ## Problem statement
 ###### [ ] DataFrame Object 
