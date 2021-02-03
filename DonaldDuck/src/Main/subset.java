@@ -8,7 +8,7 @@ public class subset extends write {
 
     public void subset(String[] elements) {
         this.elements = elements;
-        int[] index = new int[elements.length];
+        int[] index = new int[elements.length];           // determine which colomun choosed
         int counter = 0;
         for (int i = 0; i < elements.length; i++) {
             for (int j = 0; j < data[0].length; j++) {
@@ -19,11 +19,11 @@ public class subset extends write {
                 }
             }
         }
-       for (int i = 0; i < data.length; i++) {
-            int con = 0;
+       for (int i = 0; i < data.length; i++) {         //print data
+            int con = 0;                                // determine index of index(array)
             for (int j = 0; j < data[i].length; j++) {
                 if (j == index[con]) {
-                    System.out.print(data[i][j] + " ");
+                    System.out.print(data[i][j] + " ");          
                     con++;
                     if (con >= index.length) {
                         break;
@@ -35,7 +35,7 @@ public class subset extends write {
 
     }
 
-    public void subset(int row, int col) {
+    public void subset(int row, int col) {      //  sama as above just this given row and colomun
         this.row = row;
         this.col = col;
         for (int i = 0; i < row + 2; i++) {
