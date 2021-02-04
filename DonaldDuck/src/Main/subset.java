@@ -8,7 +8,7 @@ public class subset extends write {
 
     public void subset(String[] elements) {
         this.elements = elements;
-        int[] index = new int[elements.length];           // determine which colomun choosed
+        int[] index = new int[elements.length];           // determine which column to chose
         int counter = 0;
         for (int i = 0; i < elements.length; i++) {
             for (int j = 0; j < data[0].length; j++) {
@@ -19,7 +19,7 @@ public class subset extends write {
                 }
             }
         }
-       for (int i = 0; i < data.length; i++) {         //print data
+       for (int i = 0; i < data.length; i++) {          //print data
             int con = 0;                                // determine index of index(array)
             for (int j = 0; j < data[i].length; j++) {
                 if (j == index[con]) {

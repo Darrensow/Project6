@@ -13,10 +13,10 @@ public class read {
 
     private int size = 0;
 
-    public void readdata() {
+    public void readData() {
         int counter = 0;
         try {
-            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));        // get sixe of data
+            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));        // get size of data
             while (in.hasNextLine()) {
                 String a = in.nextLine();
                 String[] ar = a.split(",");

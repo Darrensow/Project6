@@ -10,12 +10,12 @@ public class write extends read {
         try {
             PrintWriter out = new PrintWriter(new FileOutputStream("create.txt"));           // write data to file
             for (int i = 0; i < data.length; i++) {
-                String a="";
+                String a = "";
                 for (int j = 0; j < data[i].length; j++) {
-                    a+= data[i][j]+",";
+                    a += data[i][j] + ",";
                 }
 
-                a=a.substring(0,a.length()-1);
+                a = a.substring(0, a.length() - 1);
                 System.out.println(a);
                 out.println(a);               
             }         

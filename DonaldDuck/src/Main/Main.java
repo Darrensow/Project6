@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         calculate obj = new calculate();     //  calling must follow the last class(lastest son class)
-        obj.readdata();
+        obj.readData();
         obj.find();
     }
 }
