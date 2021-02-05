@@ -18,6 +18,6 @@ public class Main {
         for (int i = 0; i < test.length; i++) {
             System.out.print(test[i]  + " ");
         }
-        a.displayStatsValues();
+        a.displayStatsValuesForNumeric();
     }
 }
