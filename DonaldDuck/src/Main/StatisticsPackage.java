@@ -32,7 +32,11 @@ public class StatisticsPackage extends read{
 
         //assign each of the values in that specific column into an array
         for (int i = 0; i < data.length - 1; i++) {
-            specificColumn[i] = Integer.parseInt(data[i+1][categoryColumn]);
+            if (data[i+1][categoryColumn].equals(" ")) {
+                specificColumn[i] = 0;
+            } else {
+                specificColumn[i] = Integer.parseInt(data[i+1][categoryColumn]);
+            }
         }
 
         sortColumnValues();
@@ -59,7 +63,7 @@ public class StatisticsPackage extends read{
         System.out.println("Maximum Value : " + getMaxValue());
         System.out.println("Median Value : " + getMedian());
         System.out.println("Mean Value : " + getMean());
-        System.out.println("Mode : " ); //KIV
+        System.out.println("Mode : " + getModeForNumericColumn());
         System.out.println("Range of column : " + getRange());
 
     }
@@ -108,10 +112,49 @@ public class StatisticsPackage extends read{
         // { 1, 3, 4, 9, 10, 20 } -> 7.5
         if (specificColumn.length % 2 == 0) {
             int middle = specificColumn.length / 2;
-            return (specificColumn[middle - 1] + specificColumn[middle]) / 2;
+            return (specificColumn[middle - 1] + specificColumn[middle]) / 2.0;
         } else { //else if odd number of entries, get the middle entry { 1, 3, 4, 9, 10 } -> 4
             int middle = specificColumn.length / 2;
             return specificColumn[middle];
         }
     }
+
+    public String getModeForNumericColumn(){
+        double[] clonedColumn = specificColumn.clone();
+        int length = specificColumn.length;
+        int[] counterColumn = new int[length]; //keep track of the occurrence of each element in 'clonedColumn' array
+
+        //assign the occurrence of each entry in the column to the counterColumn array
+        for (int i = 1; i < length; i++) {
+            int count = 1;
+            if (clonedColumn[i] == -1) {
+                counterColumn[i] = 0;
+            } else {
+                for (int j = i + 1; j < length; j++) {
+                    if (clonedColumn[i] == clonedColumn[j]) {
+                        count++;
+                        clonedColumn[j] = -1;
+                    }
+                }
+                counterColumn[i] = count;
+            }
+        }
+
+        int mode = counterColumn[0];
+        for(int i = 1; i < length; i++) {
+            if(counterColumn[i] >= mode){
+                mode = counterColumn[i];
+            }
+        }
+
+        String str = "";
+        for(int i = 0; i < length; i++) {
+            if(counterColumn[i] == mode){
+                str += clonedColumn[i] + " ";
+            }
+        }
+
+        return str;
+    }
+
 }

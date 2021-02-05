@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class calculate extends remove{
     public void find(){
         boolean[] is_digit=new boolean[data[0].length];       // determine whether this colomun is digit or letter
