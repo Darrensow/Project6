@@ -16,7 +16,7 @@ public class read {
     public void readData() {
         int counter = 0;
         try {
-            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));        // get size of data
+            Scanner in = new Scanner(new FileInputStream("Files\\TestNum.txt"));        // get size of data
             while (in.hasNextLine()) {
                 String a = in.nextLine();
                 String[] ar = a.split(",");
@@ -31,7 +31,7 @@ public class read {
         }
         data = new String[counter][size];
         try {
-            Scanner in = new Scanner(new FileInputStream("Files\\data.txt"));         // put data to array
+            Scanner in = new Scanner(new FileInputStream("Files\\TestNum.txt"));         // put data to array
 
             while (in.hasNextLine()) {
 

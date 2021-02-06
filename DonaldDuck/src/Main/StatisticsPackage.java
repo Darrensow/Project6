@@ -1,5 +1,6 @@
 package Main;
 
+import java.security.KeyStore;
 import java.util.Arrays;
 
 public class StatisticsPackage extends read {
@@ -10,25 +11,8 @@ public class StatisticsPackage extends read {
         return specificColumn;
     }
 
-    /***
-     * Locate the column in which the user wants to obtain the
-     * variance, standard deviation, ..., range and put it into
-     * an integer array to be sorted.
-     * categoryColumn - used to locate the column
-     * The array inside this method is used to help calculate the
-     * values. The length the array is subtracted by one
-     * because the number of columns always excludes the header(row1) of the
-     * DataFrame.
-     * @param categoryName
-     *
-     */
-    public void findAndAssignColumn(String categoryName) {
-        if (isColumnNumeric(categoryName)) {
-            assignColumnNumericValues(categoryName);
-        } else {
-            assignColumnNonNumericValues(categoryName);
-        }
-
+    public String[] getSpecificColumnString() {
+        return specificColumnString;
     }
 
     /**
@@ -43,11 +27,12 @@ public class StatisticsPackage extends read {
      *          {@code false} otherwise(non-numeric).
      */
     public boolean isColumnNumeric(String columnName){
-        for (int column = 0; column < data.length; column++) {
+        //data[column].length is the length of the header row
+        for (int column = 0; column < data[column].length; column++) {
             if (data[0][column].equals(columnName)) {
                 for (int row = 1; row < data[column].length; row++) {
                     for (int ch = 0; ch < data[column][row].length(); ch++) {
-                        if (Character.isLetter(data[row][column].charAt(ch)) && !data[column][row].equals(" ")) {
+                        if (Character.isLetter(data[column][row].charAt(ch)) && !data[column][row].equals(" ")) {
                             return false;
                         }
                     }
@@ -63,7 +48,7 @@ public class StatisticsPackage extends read {
      *     Assigns each of the values into the array. If the the data of the
      *     entry is missing, the data will be treated as ZERO.
      * </p>
-     * <li> Array size = number of rows - 1
+     * <li> Array size = number of rows - 1 (excludes the header)
      * <li> 'data[i + 1][columnLocation]' excludes the header when copying the values into the array
      *
      * @param categoryName the column name passed in by the user
@@ -91,7 +76,7 @@ public class StatisticsPackage extends read {
 
     /**
      * Create am array of the non-numeric values in the column.
-     * <li> Array size = number of rows - 1
+     * <li> Array size = number of rows - 1 (excludes the header)
      * <li> 'data[i + 1][columnLocation]' excludes the header when copying the values into the array
      * @param categoryName the column name passed in by the user
      */
@@ -122,7 +107,7 @@ public class StatisticsPackage extends read {
     }
 
     public void displayStatsValuesForNonNumeric() {
-//        System.out.println("Mode : " + getModeForNonNumericColumn());
+        System.out.println("Mode : " + getModeForNonNumericColumn());
     }
 
 
@@ -168,11 +153,10 @@ public class StatisticsPackage extends read {
     public double getMedian() {
         //if the number of entries are even number, then get the two middle numbers and divide by 2
         // { 1, 3, 4, 9, 10, 20 } -> 7.5
+        int middle = specificColumn.length / 2;
         if (specificColumn.length % 2 == 0) {
-            int middle = specificColumn.length / 2;
             return (specificColumn[middle - 1] + specificColumn[middle]) / 2.0;
         } else { //else if odd number of entries, get the middle entry { 1, 3, 4, 9, 10 } -> 4
-            int middle = specificColumn.length / 2;
             return specificColumn[middle];
         }
     }
@@ -183,8 +167,10 @@ public class StatisticsPackage extends read {
         int[] counterColumn = new int[length]; //keep track of the occurrence of each element in 'clonedColumn' array
 
         //assign the occurrence of each entry in the column to the counterColumn array
+        System.out.print("LISTS : ");
         for (int i = 1; i < length; i++) {
             int count = 1;
+            System.out.print(clonedColumn[i] + " ");
             if (clonedColumn[i] == -1) {
                 counterColumn[i] = 0;
             } else {
@@ -214,7 +200,41 @@ public class StatisticsPackage extends read {
 
         return str;
     }
-//    public String getModeForNonNumericColumn(){
-//
-//    }
+    public String getModeForNonNumericColumn(){
+        String[] clonedColumn = specificColumnString.clone();
+        int length = specificColumnString.length;
+        int[] counterColumn = new int[length]; //keep track of the occurrence of each element in 'clonedColumn' array
+
+        //assign the occurrence of each entry in the column to the counterColumn array
+        for (int i = 1; i < length; i++) {
+            int count = 1;
+            if (clonedColumn[i].equals("")) {
+                counterColumn[i] = 0;
+            } else {
+                for (int j = i + 1; j < length; j++) {
+                    if (clonedColumn[i].equals(clonedColumn[j])) {
+                        count++;
+                        clonedColumn[j] = "";
+                    }
+                }
+                counterColumn[i] = count;
+            }
+        }
+
+        int mode = counterColumn[0];
+        for (int i = 1; i < length; i++) {
+            if (counterColumn[i] >= mode) {
+                mode = counterColumn[i];
+            }
+        }
+
+        String str = "";
+        for (int i = 0; i < length; i++) {
+            if (counterColumn[i] == mode) {
+                str += clonedColumn[i] + " ";
+            }
+        }
+
+        return str;
+    }
 }
