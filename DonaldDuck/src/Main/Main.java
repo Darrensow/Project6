@@ -1,5 +1,7 @@
 package Main;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -20,11 +22,21 @@ public class Main {
         System.out.print("Enter the column name to check their statistics values : ");
         String columnName = s.nextLine();
         initiateStatisticsPack(columnName, a);
-        System.out.print("Do you want to check the variance, standard deviation (Y - Yes, Enter - No) : "); //Enter AGE
-        String input = s.next();
-        if (input.equals("Y")) {
-            a.displayStatsValuesForNumeric();
+        a.displayStatsValuesForNonNumeric();
+        String[] temp = a.getSpecificColumnString();
+        System.out.println("NAME : ");
+        for (int i = 0; i < temp.length; i++) {
+            System.out.print(temp[i] + " ");
         }
+        System.out.println();
+        a.fillMissingValues("NAME", "KOK");
+        a.displayStatsValuesForNonNumeric();
+
+        System.out.println("NAME : ");
+        for (int i = 0; i < temp.length; i++) {
+            System.out.print(temp[i] + " ");
+        }
+
     }
 
     //Call this method when the user wants to get the statistics values
@@ -37,5 +49,6 @@ public class Main {
             specificColumnString = obj.getSpecificColumnString();
         }
     }
+
 
 }

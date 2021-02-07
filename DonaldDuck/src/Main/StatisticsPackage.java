@@ -1,6 +1,5 @@
 package Main;
 
-import java.security.KeyStore;
 import java.util.Arrays;
 
 public class StatisticsPackage extends read {
@@ -42,6 +41,41 @@ public class StatisticsPackage extends read {
         return true;
     }
 
+    /***
+     * Filling in the missing values(" ") for a specific column
+     * <p>
+     *     Start by locating the specific column of the DataFrame to fill in the missing values.
+     *     Proceed to check if the entry in the column is (" "), if yes, assign the specificValue
+     *     to the DataFrame. Then reassigns the values of the column into the instance array variable.
+     * </p>
+     * @param columnName name of the column with missing values
+     * @param specificValue value input by the user
+     */
+    public void fillMissingValues(String columnName, double specificValue){
+        for (int column = 0; column < data[column].length; column++) {
+            if (data[0][column].equals(columnName)) {
+                for (int row = 1; row < data.length; row++) {
+                    if (data[row][column].equals(" ")) {
+                        data[row][column] = String.valueOf(specificValue);
+                        assignColumnNumericValues(columnName);
+                    }
+                }
+            }
+        }
+    }
+
+    public void fillMissingValues(String columnName, String specificValue){
+        for (int column = 0; column < data[column].length; column++) {
+            if (data[0][column].equals(columnName)) {
+                for (int row = 1; row < data.length; row++) {
+                    if (data[row][column].equals(" ")) {
+                        data[row][column] = specificValue;
+                        assignColumnNonNumericValues(columnName);
+                    }
+                }
+            }
+        }
+    }
     /**
      * Create a sorted array of the numeric values in the column.
      * <p>
@@ -55,7 +89,9 @@ public class StatisticsPackage extends read {
      */
     public void assignColumnNumericValues(String categoryName){
         int columnLocation = 0;
-        specificColumn = new double[data.length - 1];
+        if (specificColumn == null) {
+            specificColumn = new double[data.length - 1];
+        }
         for (int i = 0; i < data[0].length; i++) {
             if (categoryName.equals(data[0][i])) {
                 columnLocation = i;
@@ -67,7 +103,7 @@ public class StatisticsPackage extends read {
             if (data[i + 1][columnLocation].equals(" ")) {
                 specificColumn[i] = 0;
             } else {
-                specificColumn[i] = Integer.parseInt(data[i + 1][columnLocation]);
+                specificColumn[i] = Double.parseDouble(data[i + 1][columnLocation]);
             }
         }
 
@@ -82,7 +118,9 @@ public class StatisticsPackage extends read {
      */
     public void assignColumnNonNumericValues(String categoryName){
         int columnLocation = 0;
-        specificColumnString = new String[data.length - 1];
+        if (specificColumnString == null) {
+            specificColumnString = new String[data.length - 1];
+        }
         for (int i = 0; i < data[0].length; i++) {
             if (categoryName.equals(data[0][i])) {
                 columnLocation = i;
@@ -237,4 +275,5 @@ public class StatisticsPackage extends read {
 
         return str;
     }
+
 }
